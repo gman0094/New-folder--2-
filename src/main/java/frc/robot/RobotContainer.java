@@ -17,25 +17,23 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
-import frc.robot.subsystems.MotorSubsystem;
 import frc.robot.subsystems.rollersubsystem;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.pnumaticssubsystem;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class RobotContainer {
-    private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
-    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity;
-    private final MotorSubsystem motorSubsystem = new MotorSubsystem(0);    // private final ScorerSubsystem motorSubsystem = new ScorerSubsystem (2);
-    // private final elevatorsubsystem elevatorSubsystem = new elevatorsubsystem();
+    private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); 
+    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); 
     private SendableChooser<Command> autoChooser = new SendableChooser<>();
-    /** Swerve request to apply during robot-centric path following */
     private final SwerveRequest.ApplyRobotSpeeds m_pathApplyRobotSpeeds = new SwerveRequest.ApplyRobotSpeeds();
     private static final double ROLLER_EJECT_VALUE = -0.8;
     private final rollersubsystem rollersubsystem = new rollersubsystem();
+    private final pnumaticssubsystem pnumaticssubsystem = new pnumaticssubsystem();
     
     
         /* Setting up bindings for necessary control of the swerve drive platform */
@@ -52,7 +50,7 @@ public class RobotContainer {
         public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
     
         public RobotContainer() {
-            NamedCommands.registerCommand("shooter",new togglemotorcommand(motorSubsystem)); 
+            NamedCommands.registerCommand("shooter",new rollercommand(null, null, rollersubsystem)); 
             configureBindings();
 
         // Load the RobotConfig from the GUI settings. You should probably
@@ -134,6 +132,8 @@ public class RobotContainer {
         drivetrain.registerTelemetry(logger::telemeterize);
         
         joystick.a().whileTrue(new rollercommand(() -> ROLLER_EJECT_VALUE, () -> 0, rollersubsystem));
+        joystick.leftTrigger().onTrue(new extendsilonoidcommand(pnumaticssubsystem));
+        joystick.rightTrigger().onTrue(new retractsilonoidcommand(pnumaticssubsystem));
       
         
       
