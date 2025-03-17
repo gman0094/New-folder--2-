@@ -1,23 +1,23 @@
-package frc.robot;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.rollersubsystem;
+import frc.robot.subsystems.armsubsystem;
 import java.util.function.DoubleSupplier;
 
 // Command to run the roller with joystick inputs
-public class rollercommand extends Command {
+public class ArmCommand extends Command {
   private final DoubleSupplier forward;
   private final DoubleSupplier reverse;
   // private final CANRollerSubsystem rollerSubsystem;
-  private final rollersubsystem rollerSubsystem;
+  private final armsubsystem armSubsystem;
 
-  public rollercommand(
-      DoubleSupplier forward, DoubleSupplier reverse, rollersubsystem rollerSubsystem) {
-    this.forward = forward;
-    this.reverse = reverse;
-    this.rollerSubsystem = rollerSubsystem;
+  public ArmCommand(
+      DoubleSupplier forward, DoubleSupplier reverse, armsubsystem armSubsystem) {
+    this.forward = reverse;
+    this.reverse = forward;
+    this.armSubsystem = armSubsystem;
 
-    addRequirements(this.rollerSubsystem);
+    addRequirements(this.armSubsystem);
   }
 
   @Override
@@ -28,7 +28,7 @@ public class rollercommand extends Command {
   @Override
   public void execute() {
     // Run the roller motor at the desired speed
-    rollerSubsystem.runRoller(forward.getAsDouble(), reverse.getAsDouble());
+    armSubsystem.runalage(forward.getAsDouble(), reverse.getAsDouble());
   }
 
   // Runs each time the command ends via isFinished or being interrupted.

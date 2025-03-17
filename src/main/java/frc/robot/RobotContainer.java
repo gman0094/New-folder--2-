@@ -18,9 +18,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.subsystems.rollersubsystem;
+import frc.robot.commands.alagerollercommand;
+import frc.robot.commands.rollercommand;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
-import frc.robot.subsystems.pnumaticssubsystem;
+import frc.robot.subsystems.algaesubsystem;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -33,8 +35,8 @@ public class RobotContainer {
     private final SwerveRequest.ApplyRobotSpeeds m_pathApplyRobotSpeeds = new SwerveRequest.ApplyRobotSpeeds();
     private static final double ROLLER_EJECT_VALUE = -0.8;
     private final rollersubsystem rollersubsystem = new rollersubsystem();
-    private final pnumaticssubsystem pnumaticssubsystem = new pnumaticssubsystem();
-    
+    private final algaesubsystem algaesubsystem= new algaesubsystem();
+ 
     
         /* Setting up bindings for necessary control of the swerve drive platform */
         private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
@@ -131,8 +133,22 @@ public class RobotContainer {
         drivetrain.registerTelemetry(logger::telemeterize);
         
         joystick.a().whileTrue(new rollercommand(() -> ROLLER_EJECT_VALUE, () -> 0, rollersubsystem));
-        joystick.leftTrigger().onTrue(new extendsilonoidcommand(pnumaticssubsystem));
-        joystick.rightTrigger().onTrue(new retractsilonoidcommand(pnumaticssubsystem));
+        
+        joystick.rightBumper()
+        .whileTrue(new alagerollercommand(
+            () -> 0, 
+            () -> 0.5,  // Replace with actual intake speed (e.g., 0.5)
+            algaesubsystem
+        ));
+
+        joystick.rightTrigger(0.2)
+        .whileTrue(new alagerollercommand(
+            () -> 0, 
+            () -> -0.5,  
+            algaesubsystem
+        ));
+
+        
       
         
       
