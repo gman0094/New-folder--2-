@@ -35,7 +35,7 @@ public class RobotContainer {
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); 
     private SendableChooser<Command> autoChooser = new SendableChooser<>();
     private final SwerveRequest.ApplyRobotSpeeds m_pathApplyRobotSpeeds = new SwerveRequest.ApplyRobotSpeeds();
-    private static final double ROLLER_EJECT_VALUE = -0.8;
+    // private static final double ROLLER_EJECT_VALUE = 0.6;
     private final rollersubsystem rollersubsystem = new rollersubsystem();
     private final algaesubsystem algaesubsystem= new algaesubsystem();
     private final armsubsystem armsubsystem= new armsubsystem();
@@ -136,11 +136,13 @@ public class RobotContainer {
         drivetrain.registerTelemetry(logger::telemeterize);
         
         joystick.a().whileTrue(new rollercommand(() -> 0.5, () -> 0, rollersubsystem));
+
+        joystick.b().whileTrue(new rollercommand(() -> 0, () -> 0, rollersubsystem));
         
         joystick.rightBumper()
         .whileTrue(new alagerollercommand(
             () -> 0, 
-            () -> 0.5,  
+            () -> 0.5,  // Replace with actual intake speed (e.g., 0.5)
             algaesubsystem
         ));
 
@@ -151,14 +153,10 @@ public class RobotContainer {
             algaesubsystem
         ));
 
-        joystick.leftBumper().whileTrue(new ArmCommand(() -> 0,()-> 0.5,armsubsystem));
-
-        joystick.leftTrigger(0.2)
-        .whileTrue(new ArmCommand( 
-            () ->0,
-            () -> -0.5, 
-            armsubsystem
-            ));
+        joystick.leftBumper()
+        .whileTrue(new ArmCommand(
+            () -> 0,
+            ()-> 0.5, armsubsystem));
 
         
       

@@ -14,7 +14,6 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 /** Class to run the rollers over CAN */
 public class rollersubsystem extends SubsystemBase {
   private final SparkMax rollerMotor;
-  private static final double ROLLER_SPEED = 0.8;
   private static final double ROLLER_MOTOR_VOLTAGE_COMP = 10.0;
   private static final int ROLLER_MOTOR_CURRENT_LIMIT = 30;
 
