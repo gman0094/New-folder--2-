@@ -135,9 +135,10 @@ public class RobotContainer {
 
         drivetrain.registerTelemetry(logger::telemeterize);
         
-        joystick.a().whileTrue(new rollercommand(() -> 0.5, () -> 0, rollersubsystem));
+        joystick.a().whileTrue(new rollercommand(() -> 0.75, () -> 0, rollersubsystem));
 
-        joystick.b().whileTrue(new rollercommand(() -> 0, () -> 0, rollersubsystem));
+        joystick.b().whileTrue(new rollercommand(() -> -0.5, () -> 0, rollersubsystem));
+        joystick.x().whileTrue(new rollercommand(() -> 0, () -> 0, rollersubsystem));
         
         joystick.rightBumper()
         .whileTrue(new alagerollercommand(
