@@ -9,12 +9,6 @@
           "data": {
             "pathName": "bluel"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "shooter"
-          }
         }
       ]
     }

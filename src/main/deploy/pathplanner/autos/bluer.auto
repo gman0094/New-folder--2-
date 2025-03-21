@@ -9,12 +9,6 @@
           "data": {
             "pathName": "bluer"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "shooter"
-          }
         }
       ]
     }

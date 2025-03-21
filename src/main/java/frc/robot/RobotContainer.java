@@ -140,29 +140,13 @@ public class RobotContainer {
         joystick.b().whileTrue(new rollercommand(() -> -0.5, () -> 0, rollersubsystem));
         joystick.x().whileTrue(new rollercommand(() -> 0, () -> 0, rollersubsystem));
         
-        joystick.rightBumper()
-        .whileTrue(new alagerollercommand(
-            () -> 0, 
-            () -> 0.5,  // Replace with actual intake speed (e.g., 0.5)
-            algaesubsystem
-        ));
+        joystick.rightBumper().whileTrue(new alagerollercommand( () -> 0, () -> 0.5, algaesubsystem));
 
-        joystick.rightTrigger(0.2)
-        .whileTrue(new alagerollercommand(
-            () -> 0, 
-            () -> -0.5,  
-            algaesubsystem
-        ));
+        joystick.rightTrigger(0.2).whileTrue(new alagerollercommand( () -> -0.5, () -> 0,  algaesubsystem));
 
-        joystick.leftBumper()
-        .whileTrue(new ArmCommand(
-            () -> 0,
-            ()-> 0.5, armsubsystem));
+        joystick.leftBumper().whileTrue(new ArmCommand(() -> 0.5,()-> 0, armsubsystem));
 
-        
-      
-        
-      
+        joystick.leftTrigger(0.2).whileTrue(new ArmCommand( () -> -0.5, () -> 0, armsubsystem));
     }
 
     public Command getAutonomousCommand() {
