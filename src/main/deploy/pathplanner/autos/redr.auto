@@ -9,12 +9,6 @@
           "data": {
             "pathName": "redr"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "shooter"
-          }
         }
       ]
     }
