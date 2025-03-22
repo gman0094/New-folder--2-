@@ -15,6 +15,7 @@ import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.subsystems.rollersubsystem;
@@ -57,6 +58,7 @@ public class RobotContainer {
         public RobotContainer() {
             NamedCommands.registerCommand("shooter",new rollercommand(null, null, rollersubsystem)); 
             configureBindings();
+            // WaitCommand.registerCommand("wait", new WaitCommand(1));
 
         // Load the RobotConfig from the GUI settings. You should probably
     // store this in your Constants file
@@ -118,7 +120,7 @@ public class RobotContainer {
             )
         );
 
-        joystick.povUp().whileTrue(drivetrain.applyRequest(() -> brake));
+        joystick.povLeft().whileTrue(drivetrain.applyRequest(() -> brake));
         joystick.povDown().whileTrue(drivetrain.applyRequest(() ->
             point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))
         ));
@@ -135,7 +137,7 @@ public class RobotContainer {
 
         drivetrain.registerTelemetry(logger::telemeterize);
         
-        joystick.a().whileTrue(new rollercommand(() -> 0.75, () -> 0, rollersubsystem));
+        joystick.a().whileTrue(new rollercommand(() -> 0.5, () -> 0, rollersubsystem));
 
         joystick.b().whileTrue(new rollercommand(() -> -0.5, () -> 0, rollersubsystem));
         joystick.x().whileTrue(new rollercommand(() -> 0, () -> 0, rollersubsystem));

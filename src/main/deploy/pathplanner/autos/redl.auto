@@ -7,13 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "redl"
+            "pathName": "firsthalfRL"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "secondhalfRL"
           }
         }
       ]
     }
   },
-  "resetOdom": false,
+  "resetOdom": true,
   "folder": null,
   "choreoAuto": false
 }
