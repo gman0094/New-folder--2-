@@ -7,31 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "firsthalfRL"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.5
+            "pathName": "New New Path"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "shooter"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.5
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "secondhalfRL"
           }
         }
       ]
