@@ -27,7 +27,7 @@ public class algaesubsystem extends SubsystemBase {
     SparkMaxConfig alageConfig = new SparkMaxConfig();
    alageConfig.voltageCompensation(12.0);
    alageConfig.smartCurrentLimit(40);
-    alageConfig.inverted(false);
+    alageConfig.inverted(true);
     alage.configure(alageConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 

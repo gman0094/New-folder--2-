@@ -18,8 +18,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.subsystems.rollersubsystem;
-import frc.robot.commands.ArmCommand;
-import frc.robot.commands.alagerollercommand;
 import frc.robot.commands.rollercommand;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -36,13 +34,11 @@ public class RobotContainer {
     private SendableChooser<Command> autoChooser = new SendableChooser<>();
     private final SwerveRequest.ApplyRobotSpeeds m_pathApplyRobotSpeeds = new SwerveRequest.ApplyRobotSpeeds();
     private final rollersubsystem rollersubsystem = new rollersubsystem();
-    private final algaesubsystem algaesubsystem= new algaesubsystem();
-    private final armsubsystem armsubsystem= new armsubsystem();
  
     
         /* Setting up bindings for necessary control of the swerve drive platform */
         private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-                .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.05) // Add a 10% deadband
+                .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.03) // Add a 10% deadband
                 .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
         private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
         private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
@@ -54,7 +50,7 @@ public class RobotContainer {
         public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
     
         public RobotContainer() {
-            NamedCommands.registerCommand("shooter",new rollercommand(null, null, rollersubsystem)); 
+           NamedCommands.registerCommand("shooter", new rollercommand(null, null, rollersubsystem));
             configureBindings();
             // WaitCommand.registerCommand("wait", new WaitCommand(1));
 
@@ -140,13 +136,15 @@ public class RobotContainer {
         joystick.b().whileTrue(new rollercommand(() -> -0.5, () -> 0, rollersubsystem));
         joystick.x().whileTrue(new rollercommand(() -> 0, () -> 0, rollersubsystem));
         
-        joystick.rightBumper().whileTrue(new alagerollercommand( () -> 0, () -> 0.5, algaesubsystem));
+        // joystick.rightBumper().whileTrue(new alagerollercommand( () -> 0, () -> 0.5, algaesubsystem));
 
-        joystick.rightTrigger(0.2).whileTrue(new alagerollercommand( () -> -0.5, () -> 0,  algaesubsystem));
+        // joystick.rightTrigger(0.2).whileTrue(new alagerollercommand( () -> 0, () -> -0.5,  algaesubsystem));
 
-        joystick.leftBumper().whileTrue(new ArmCommand(() -> 0.5,()-> 0, armsubsystem));
+        // joystick.povRight().whileTrue(new alagerollercommand(() -> 0, () -> 0, algaesubsystem));
 
-        joystick.leftTrigger(0.2).whileTrue(new ArmCommand( () -> -0.5, () -> 0, armsubsystem));
+        // joystick.leftBumper() .onTrue(new RetractArmCommand(armsubsystem));
+
+        // joystick.leftTrigger(0.2).onTrue(new ExtendArmCommand(armsubsystem));
     }
 
     public Command getAutonomousCommand() {

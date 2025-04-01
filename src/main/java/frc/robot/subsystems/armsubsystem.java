@@ -7,38 +7,51 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
-/** Class to run the algae rollers over CAN */
+
 public class armsubsystem extends SubsystemBase {
-  private final SparkMax armmotor;
-  // private final SparkMaxConfig armConfig;
+    private final SparkMax armMotor = new SparkMax(20, MotorType.kBrushless); // Set correct CAN ID
+    private boolean armExtended = false;
 
+    public armsubsystem() {
+      SparkMaxConfig armconfig = new SparkMaxConfig();
+     armconfig.voltageCompensation(12.0);
+     armconfig.smartCurrentLimit(40);
+     armconfig.inverted(false);
+     armMotor.configure(armconfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    }
 
-  public armsubsystem() {
-    // Set up the roller motors as brushed motors
-    armmotor = new SparkMax(5, MotorType.kBrushed);
-    SparkMaxConfig armConfig = new SparkMaxConfig();
+    /**
+     * Extends the arm forward.
+     */
+    public void extendArm() {
+        armMotor.set(0.4); // Adjust speed as needed
+        armExtended = true;
+    }
 
-    armmotor.setCANTimeout(250);
+    /**
+     * Retracts the arm backward.
+     */
+    public void retractArm() {
+        armMotor.set(-0.05); // Adjust speed as needed
+        armExtended = false;
+    }
 
+    /**
+     * Stops the arm movement.
+     */
+    public void stopArm() {
+        armMotor.set(0);
+    }
 
+    /**
+     * Checks if the arm is extended.
+     */
+    public boolean isArmExtended() {
+        return armExtended;
+    }
 
-    armConfig.voltageCompensation(12.0);  // Set to 12V
-    armConfig.smartCurrentLimit(40);
-    armConfig.inverted(false);  // false = normal, true = inverted
-
-    armmotor.configure(armConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
-
-
-
-  }
-
-  @Override
-  public void periodic() {
-  }
-
-  /** This is a method that makes the roller spin */
-  public void runalage(double forward, double reverse) {
-    armmotor.set(forward - reverse);
-  }
+    @Override
+    public void periodic() {
+        // Optional: Update telemetry data here if needed.
+    }
 }
