@@ -47,7 +47,7 @@ public class RobotContainer {
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
-    private final UsbCamera camera;
+    // private final UsbCamera camera;
 
     public RobotContainer() {
         NamedCommands.registerCommand("shooting", new rollercommand(null, null, rollersubsystem));
@@ -71,7 +71,7 @@ public class RobotContainer {
                     // optionally outputs individual module feedforwards
                     new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller
                                                     // for holonomic drive trains
-                            new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+                            new PIDConstants(2.5, 0.0, 0.0), // Translation PID constants
                             new PIDConstants(5.0, 0.0, 0.0) // Rotation PID constants
                     ),
                     config, // The robot configuration
@@ -98,7 +98,7 @@ public class RobotContainer {
             // Handle exception as needed
             e.printStackTrace();
         }
-        camera = CameraServer.startAutomaticCapture(0);
+        // camera = CameraServer.startAutomaticCapture(0);
 
     }
 

@@ -16,28 +16,28 @@
     },
     {
       "anchor": {
-        "x": 5.169270833333332,
-        "y": 5.394618055555555
+        "x": 5.349143835616438,
+        "y": 5.662799657534247
       },
       "prevControl": {
-        "x": 7.343407449901706,
-        "y": 4.576596193310445
+        "x": 7.523280452184812,
+        "y": 4.844777795289137
       },
       "nextControl": {
-        "x": 4.443505833865712,
-        "y": 5.6676881247924635
+        "x": 4.6233788361488175,
+        "y": 5.9358697267711555
       },
       "isLocked": false,
       "linkedName": "secondpointBL"
     },
     {
       "anchor": {
-        "x": 1.5025684931506849,
-        "y": 7.255522260273973
+        "x": 2.058518835616438,
+        "y": 6.849828767123288
       },
       "prevControl": {
-        "x": 1.7487375342425384,
-        "y": 7.211924058385394
+        "x": 2.3046878767082917,
+        "y": 6.806230565234709
       },
       "nextControl": null,
       "isLocked": false,
@@ -52,17 +52,10 @@
   ],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [
-    {
-      "name": "shooter",
-      "waypointRelativePos": 0.9762711864406779,
-      "endWaypointRelativePos": null,
-      "command": null
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 1.5,
+    "maxAcceleration": 1.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -76,7 +69,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 179.5448004067338
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }
