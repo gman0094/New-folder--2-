@@ -13,19 +13,19 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.5
+            "waitTime": 2.0
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "shooter"
+            "name": "shooting"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.5
+            "waitTime": 2.0
           }
         },
         {
